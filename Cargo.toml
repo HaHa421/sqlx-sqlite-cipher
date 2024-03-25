@@ -5,8 +5,12 @@ description = "SQLite driver implementation for SQLx. Not for direct use; see th
 version = "0.7.4"
 license = "MIT OR Apache-2.0"
 edition = "2021"
-#authors.workspace = true
-#repository.workspace = true
+authors = [
+  "ha421 <hha835773@gmail.com>",
+  "Sqlx authors"
+]
+homepage = "https://github.com/HaHa421/sqlx-sqlite-cipher"
+repository = "https://github.com/HaHa421/sqlx-sqlite-cipher"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
