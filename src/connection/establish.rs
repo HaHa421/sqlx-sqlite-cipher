@@ -207,6 +207,8 @@ impl EstablishParams {
             return Err(Error::Database(Box::new(SqliteError::new(handle.as_ptr()))));
         }
 
+        super::notifications::init_update_handler(&handle);
+
         // Enable extended result codes
         // https://www.sqlite.org/c3ref/extended_result_codes.html
         unsafe {

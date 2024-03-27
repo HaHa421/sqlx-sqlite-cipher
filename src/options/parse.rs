@@ -99,15 +99,19 @@ impl SqliteConnectOptions {
                     },
 
                     "vfs" => options.vfs = Some(Cow::Owned(value.into_owned())),
-                    
+
                     "key" => {
-                      options.pragmas.insert("key".into(),Some(String::from(value).into()));
+                        options
+                            .pragmas
+                            .insert("key".into(), Some(String::from(value).into()));
                     }
-                    
+
                     _ => {
                         return Err(Error::Configuration(
-                            format!("ha, unknown query parameter `{key}` while parsing connection URL")
-                                .into(),
+                            format!(
+                                "ha, unknown query parameter `{key}` while parsing connection URL"
+                            )
+                            .into(),
                         ));
                     }
                 }

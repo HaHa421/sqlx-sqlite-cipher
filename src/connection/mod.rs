@@ -34,6 +34,8 @@ mod intmap;
 
 mod worker;
 
+mod notifications;
+
 /// A connection to an open [Sqlite] database.
 ///
 /// Because SQLite is an in-process database accessed by blocking API calls, SQLx uses a background

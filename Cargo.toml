@@ -2,12 +2,13 @@
 name = "sqlx-sqlite-cipher"
 documentation = "https://docs.rs/sqlx"
 description = "SQLite driver implementation for SQLx. Not for direct use; see the `sqlx` crate for details."
-version = "0.7.4"
+version = "0.7.5"
 license = "MIT OR Apache-2.0"
 edition = "2021"
 authors = [
   "ha421 <hha835773@gmail.com>",
-  "Sqlx authors"
+  "Sqlx authors",
+  "rusqlite authors"
 ]
 homepage = "https://github.com/HaHa421/sqlx-sqlite-cipher"
 repository = "https://github.com/HaHa421/sqlx-sqlite-cipher"
@@ -17,8 +18,8 @@ repository = "https://github.com/HaHa421/sqlx-sqlite-cipher"
 [features]
 default = [ "chrono" , "migrate" ]
 any = ["sqlx-core/any"]
-json = ["sqlx-core/json", "serde"]
-offline = ["sqlx-core/offline", "serde"]
+json = ["sqlx-core/json"]
+offline = ["sqlx-core/offline"]
 migrate = ["sqlx-core/migrate"]
 
 chrono = ["dep:chrono"]
@@ -50,9 +51,12 @@ atoi = "2.0"
 log = "0.4.17"
 tracing = { version = "0.1.37", features = ["log"] }
 
-serde = { version = "1.0.145", features = ["derive"], optional = true }
+serde = { version = "1.0.145", features = ["derive"] }
 regex = { version = "1.5.5", optional = true }
 urlencoding = "2.1.3"
+
+state = { version = "0.6" , features = [ "tls" ] }
+dashmap = "5"
 
 [dependencies.libsqlite3-sys]
 version = "0.27.0"

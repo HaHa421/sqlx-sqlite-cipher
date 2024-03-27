@@ -84,8 +84,6 @@ pub struct SqliteConnectOptions {
 
     #[cfg(feature = "regexp")]
     pub(crate) register_regexp_function: bool,
-    
-    
 }
 
 #[derive(Clone, Debug)]
@@ -555,10 +553,10 @@ impl SqliteConnectOptions {
         self.register_regexp_function = true;
         self
     }
-    
+
     #[cfg(feature = "sqlcipher")]
-    pub fn key(mut self, key : String) -> Self {
-      self.pragmas.insert("key".into(),Some(key.into()));
-      self
+    pub fn key(mut self, key: String) -> Self {
+        self.pragmas.insert("key".into(), Some(key.into()));
+        self
     }
 }
