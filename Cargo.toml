@@ -2,7 +2,7 @@
 name = "sqlx-sqlite-cipher"
 documentation = "https://docs.rs/sqlx"
 description = "SQLite driver implementation for SQLx. Not for direct use; see the `sqlx` crate for details."
-version = "0.7.5"
+version = "0.7.6"
 license = "MIT OR Apache-2.0"
 edition = "2021"
 authors = [
@@ -70,6 +70,10 @@ features = [
 
 [dependencies.sqlx-core]
 version = "0.7"
+
+[dependencies.rxqlite-notification]
+version = "0.1"
+#path = "../rxqlite/crates/rxqlite-notification"
 
 [dev-dependencies]
 sqlx = { version = "0.7" , default-features = false, features = ["macros", "runtime-tokio", "tls-none"] }

@@ -2,48 +2,13 @@
 use dashmap::DashMap;
 use flume::{Receiver, Sender};
 use libsqlite3_sys as ffi;
-use serde::{Deserialize, Serialize};
 use std::sync::Arc;
+use rxqlite_notification::*;
 
-//https://github.com/rusqlite/rusqlite/blob/b41bd805710149ebfaed577dfedb464338e2ca97/src/hooks.rs#L17
 
-/// Action Codes
-#[derive(Serialize, Deserialize, Clone, Copy, Debug, Eq, PartialEq)]
-#[repr(i32)]
-#[non_exhaustive]
-#[allow(clippy::upper_case_acronyms)]
-pub enum Action {
-    /// Unsupported / unexpected action
-    UNKNOWN = -1,
-    /// DELETE command
-    SQLITE_DELETE = ffi::SQLITE_DELETE,
-    /// INSERT command
-    SQLITE_INSERT = ffi::SQLITE_INSERT,
-    /// UPDATE command
-    SQLITE_UPDATE = ffi::SQLITE_UPDATE,
-}
 
-impl From<i32> for Action {
-    #[inline]
-    fn from(code: i32) -> Action {
-        match code {
-            ffi::SQLITE_DELETE => Action::SQLITE_DELETE,
-            ffi::SQLITE_INSERT => Action::SQLITE_INSERT,
-            ffi::SQLITE_UPDATE => Action::SQLITE_UPDATE,
-            _ => Action::UNKNOWN,
-        }
-    }
-}
 
-#[derive(Debug, Clone, Serialize, Deserialize)]
-pub enum Notification {
-    Update {
-        action: Action,
-        database: String,
-        table: String,
-        row_id: i64,
-    },
-}
+
 
 pub type ClientId = u64;
 

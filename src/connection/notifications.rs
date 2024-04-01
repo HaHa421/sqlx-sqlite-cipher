@@ -1,6 +1,6 @@
 use super::*;
 
-use crate::notifications::{Action, Notification};
+use rxqlite_notification::{Action, Notification};
 //use flume::Sender;
 use libsqlite3_sys as ffi;
 use std::os::raw::{c_char, c_int, c_void};
