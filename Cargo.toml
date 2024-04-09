@@ -2,7 +2,7 @@
 name = "sqlx-sqlite-cipher"
 documentation = "https://docs.rs/sqlx"
 description = "SQLite driver implementation for SQLx. Not for direct use; see the `sqlx` crate for details."
-version = "0.7.6"
+version = "0.7.7"
 license = "MIT OR Apache-2.0"
 edition = "2021"
 authors = [
