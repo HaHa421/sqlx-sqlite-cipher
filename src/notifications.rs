@@ -7,7 +7,7 @@ use libsqlite3_sys as ffi;
 use std::sync::Arc;
 use rxqlite_notification::*;
 
-
+use std::sync::atomic::{AtomicU64, Ordering};
 
 
 
@@ -22,17 +22,22 @@ pub struct NotificationDispatcher {
       String,
       HashMap<ClientId, Sender<Notification>>
     >>,
+    pub client_id_counter: AtomicU64
 }
 
 impl NotificationDispatcher {
+    #[inline]
+    fn get_client_id(&self)->ClientId {
+      self.client_id_counter.fetch_add(1, Ordering::Relaxed)
+    }
     pub fn register_client(&self) -> (ClientId, Receiver<Notification>) {
-        let client_id: ClientId = self.clients.len() as _;
+        let client_id: ClientId = self.get_client_id();
         let (tx, rx) = flume::unbounded();
         self.clients.insert(client_id, tx);
         (client_id, rx)
     }
     pub fn register_client_for_table(&self,table_name:& str) -> (ClientId, Receiver<Notification>) {
-        let client_id: ClientId = self.clients.len() as _;
+        let client_id: ClientId = self.get_client_id();
         let (tx, rx) = flume::unbounded();
         let mut entry=self.table_clients.entry(table_name.into()).or_insert(Default::default());
         entry.insert(client_id, tx);
@@ -85,6 +90,7 @@ impl Default for NotificationDispatcher {
             tx,
             clients: clients2,
             table_clients: table_clients2,
+            client_id_counter: AtomicU64::new(0),
         }
     }
 }
