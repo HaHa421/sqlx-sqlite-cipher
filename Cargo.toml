@@ -59,7 +59,7 @@ state = { version = "0.6" , features = [ "tls" ] }
 dashmap = "5"
 
 [dependencies.libsqlite3-sys]
-version = "0.27.0"
+version = "0.29.0"
 default-features = false
 features = [
     "pkg-config",
